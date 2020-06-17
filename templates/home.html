@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>earthquake management</title>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <h1>Assignment 2</h1>
+    <h2>1001778272</h2>
+</div>
+
+<div class="container">
+    <form action="/dist" method="POST">
+        <button class="btn btn-default" type="submit">View Distribution</button>
+    </form>
+    <form action="/convert" method="POST">
+        <button class="btn btn-default" type="submit">Show Analyze Result</button>
+    </form>
+</div>
+
+<div class="container">
+    <h5>question1</h5>
+    <form action="/home" method="POST">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="input-group">
+                    <input name="type" value="top" style="display:none;">
+                    <span class="input-group-btn">
+                        <input type="number" class="form-control" placeholder="input number K and get largest 5 quakes "
+                               name="topK">
+                        <button class="btn btn-default" type="submit">Search</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="container">
+    <h5>question2</h5>
+    <form action="/home" method="POST">
+        <label for="city">Choose a city:</label>
+            <select class ="chosen" name="city" id="city" >
+                  <option value="Arlington">Arlington</option>
+                  <option value="Dallas">Dallas</option>
+                  <option value="Anchorage">Anchorage</option>
+            </select>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="input-group">
+                    <input name="type" value="distance" style="display:none;">
+
+                    <span class="input-group-btn">
+                        <input type="number" class="form-control"
+                               placeholder="Input the quake's distance from specific city" name="distance"  >
+                        <button class="btn btn-default" type="submit">Search</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="container">
+    <h5>question3</h5>
+    <form action="/home" method="POST">
+        <input name="type" value="searchByDateAndLevel" style="display:none;"/>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <input type="text" class="form-control" style="width:22%;" placeholder="min magnitude"
+                               name="start"/>
+                        <input type="text" class="form-control" style="width:22%;" placeholder="max magnitude"
+                               name="end"/>
+                        <input type="date" class="form-control" style="width:28%;" placeholder="start date"
+                               name="startdate"/>
+                        <input type="date" class="form-control" style="width:28%;" placeholder="end date" name="enddate"/>
+                        <button class="btn btn-default" type="submit">Search</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="container">
+    <h5>question4</h5>
+    <form action="/home" method="POST">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="input-group">
+                    <input name="type" value="numbers" style="display:none;">
+                    <span class="input-group-btn">
+                        <input type="number" class="form-control" placeholder="input days before today "
+                               name="days">
+                        <button class="btn btn-default" type="submit">Search</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="input-group">
+                <span class="input-group-btn">
+                    {% if not output %}
+                        <h6>please input days</h6>
+                        <input type="text" name="text1" value="" id="text1" class="form-control" placeholder="1 to 2" style="width:25%;" disabled/>
+                        <input type="text" name="text2" value="" id="text2" class="form-control" placeholder="2 to 3" style="width:25%;" disabled/>
+                        <input type="text" name="text2" value="" id="text2" class="form-control" placeholder="3 to 4" style="width:25%;" disabled/>
+                        <input type="text" name="text2" value="" id="text2" class="form-control" placeholder="4 to 7" style="width:25%;" disabled/>
+                    {% else %}
+                        <h6>In most recent {{ output[0] }} days, how many quakes (Richter scale): 1 to 2, 2 to 3, 3 to 4, up to 7?</h6>
+                        <input type="text" name="text1" value="{{ output[1] }}" id="text1" class="form-control" placeholder="1 to 2" style="width:25%;" disabled/>
+                        <input type="text" name="text2" value="{{ output[2] }}" id="text2" class="form-control" placeholder="2 to 3" style="width:25%;" disabled/>
+                        <input type="text" name="text2" value="{{ output[3] }}" id="text2" class="form-control" placeholder="3 to 4" style="width:25%;" disabled/>
+                        <input type="text" name="text2" value="{{ output[4] }}" id="text2" class="form-control" placeholder="4 to 7" style="width:25%;" disabled/>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <h5>question5</h5>
+    <form action="/home" method="POST">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="input-group">
+                    <input name="type" value="common" style="display:none;">
+                    <span class="input-group-btn">
+                        <input type="number" class="form-control" placeholder="input distance from Anchorage and Dallas"
+                               name="more_common">
+                        <button class="btn btn-default" type="submit">Search</button>
+                        {% if not common %}
+                            <h6>please input distance</h6>
+                            <input type="text" name="text1" value="" id="text1" class="form-control" placeholder="Are quakes more common within 1000 km of Anchorage than Dallas ?" style="width:100%;" disabled/>
+                        {% else %}
+                            <h6></h6>
+                            <input type="text" name="text1" value="{{ common[1] }} are more common within {{ common[0] }} km than {{ common[2] }}" id="text1" class="form-control" style="width:100%;" disabled/>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="container">
+    <h5>question6</h5>
+    <form action="/home" method="POST">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="input-group">
+                    <input name="type" value="largest_quake" style="display:none;">
+                    <span class="input-group-btn">
+                        <input type="number" class="form-control" placeholder="input distance from Dallas"
+                               name="distance">
+                        <button class="btn btn-default" type="submit">Search</button>
+                        {% if not place %}
+                            <h6>please input distance</h6>
+                            <input type="text" name="text1" value="" id="text1" class="form-control" placeholder="Where did largest quake occur near Dallas?" style="width:100%;" disabled/>
+                        {% else %}
+                            <h6></h6>
+                            <input type="text" name="text1" value="{{ place }}" id="text1" class="form-control" style="width:100%;" disabled/>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<div class="container">
+    {% if k==0 %}  <h5>no record</h5>  {% endif %}
+    {% if k > 0 %}
+        <h5>totally {{ k }} will show the first 100 rows</h5>
+        <table class="table" border="1">
+            <tr>
+                <th>time</th>
+                <th>latitude</th>
+                <th>longitude</th>
+                <th>depth</th>
+                <th>mag</th>
+                <th>magType</th>
+                <th>nst</th>
+                <th>gap</th>
+                <th>dmin</th>
+                <th>rms</th>
+                <th>net</th>
+                <th>updated</th>
+                <th>place</th>
+                <th>type</th>
+                <th>horizontalError</th>
+                <th>depthError</th>
+                <th>magError</th>
+                <th>magNst</th>
+                <th>status</th>
+                <th>locationSource</th>
+                <th>magSource</th>
+            </tr>
+            {% for rel in result[:100] %}
+                <tr>
+                    <td>{{ rel[1] }}</td>
+                    <td>{{ rel[2] }}</td>
+                    <td>{{ rel[3] }}</td>
+                    <td>{{ rel[4] }}</td>
+                    <td>{{ rel[5] }}</td>
+                    <td>{{ rel[6] }}</td>
+                    <td>{{ rel[7] }}</td>
+                    <td>{{ rel[8] }}</td>
+                    <td>{{ rel[9] }}</td>
+                    <td>{{ rel[10] }}</td>
+                    <td>{{ rel[11] }}</td>
+                    <td>{{ rel[12] }}</td>
+                    <td>{{ rel[13] }}</td>
+                    <td>{{ rel[14] }}</td>
+                    <td>{{ rel[15] }}</td>
+                    <td>{{ rel[16] }}</td>
+                    <td>{{ rel[17] }}</td>
+                    <td>{{ rel[18] }}</td>
+                    <td>{{ rel[19] }}</td>
+                    <td>{{ rel[20] }}</td>
+                    <td>{{ rel[21] }}</td>
+                    <td>{{ rel[22] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+</div>
+
+</body>
+</html>

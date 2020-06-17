@@ -1,0 +1,95 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>edit</title>#}
+{#    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">#}
+{#	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>#}
+{#	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>#}
+{#</head>#}
+{#<body>#}
+{#<div class="container">#}
+{#<ul class="nav nav-tabs">#}
+{#  <li role="presentation" class="active"><a href="/home">query</a></li>#}
+{#  <li role="presentation"><a href="/statics">modify</a></li>#}
+{#</ul>#}
+{#</div>#}
+{#<div class="container">#}
+{#    <h1>assigment1</h1>#}
+{#</div>#}
+{#<div class="container">#}
+{#<div class="col-lg-6">#}
+{#    <form action="{{ url_for('add') }}" method="post" enctype="multipart/form-data">#}
+{#<div class="input-group">#}
+{#  <span class="input-group-addon" id="LastName" style="width:35%;">LastName</span>#}
+{#  <input name="LastName" type="text" class="form-control" placeholder="LastName" aria-describedby="basic-addon1">#}
+{#</div>#}
+{#<div class="input-group">#}
+{#  <span class="input-group-addon" id="FirstName" style="width:35%;">FirstName</span>#}
+{#  <input name="FirstName" type="text" class="form-control" placeholder="FirstName" aria-describedby="basic-addon1">#}
+{#</div>#}
+{#    <div class="input-group">#}
+{#  <span class="input-group-addon" id="Address" style="width:35%;">Address</span>#}
+{#  <input name="Address" type="text" class="form-control" placeholder="Address" aria-describedby="basic-addon1">#}
+{#</div>#}
+{#    <div class="input-group">#}
+{#  <span class="input-group-addon" id="City" style="width:35%;">City</span>#}
+{#  <input name="City" type="text" class="form-control" placeholder="City" aria-describedby="basic-addon1">#}
+{#</div>#}
+{#    <div class="input-group">#}
+{#  <span class="input-group-addon" id="Picture" style="width:35%;">Picture</span>#}
+{#  <input name="Picture" type="file" class="form-control" placeholder="Picture" aria-describedby="basic-addon1">#}
+{#</div>#}
+{#            <div class="input-group">#}
+{#  <span class="input-group-addon" id="EnrollmentYear" style="width:35%;">EnrollmentYear</span>#}
+{#  <input name="EnrollmentYear" type="text" class="form-control" placeholder="EnrollmentYear" aria-describedby="basic-addon1">#}
+{#</div>#}
+{#    <div class="input-group">#}
+{#  <span class="input-group-addon" id="Notes" style="width:35%;">Notes</span>#}
+{#  <input name="Notes" type="text" class="form-control" placeholder="Notes" aria-describedby="basic-addon1">#}
+{#</div>#}
+{#        <p><input type="submit" class="btn btn-primary" role="button" value="Save"> <a href="/home" class="btn btn-default" role="button">Cancel</a></p>#}
+{#    </form>#}
+{#</div>#}
+{#</div>#}
+{#</body>#}
+{#</html>#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>assignment1</title>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+{#<div class="container">#}
+{#<ul class="nav nav-tabs">#}
+{#  <li role="presentation" class="active"><a href="/home">query</a></li>#}
+{#  <li role="presentation"><a href="/statics">modify</a></li>#}
+{#</ul>#}
+{#</div>#}
+<div class="container">
+    <h1>1001682442, Sui, Xueying</h1>
+</div>
+
+
+<div class="container">
+    <table class="table" border="1">
+{#        <caption><a class="btn btn-default btn-primary" href="/addview">Add</a></caption>#}
+        <tr><th>Picture</th><th>Picture Name</th><th>Size</th></tr>
+        {%for rel in result%}
+        <tr>
+            <td  style="width:10%"><img src="{{ url_for('static', filename=rel[0])}}"></td>
+            <td>{{rel[0]}}</td>
+            <td>{{rel[1]}}</td>
+
+{#            <td  style="width:25%"><img style="width:10%;" src="{{ url_for('static', filename=rel[4])}}"></td>#}
+        </tr>
+        {%endfor%}
+    </table>
+</div>
+
+</body>
+</html>

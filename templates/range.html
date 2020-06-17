@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>assignment1</title>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <h1>1001682442 Sui,Xueying</h1>
+</div>
+
+<div class="container">
+    {%for incdata in inc_data%} <h5> {{incdata}}</h5>{% endfor %}
+{%for ki in k%} <h5> {{ki}}</h5>{% endfor %}
+
+     {%for res in result%}
+    <table class="table" border="1">
+        <tr><th>time</th><th>latitude</th><th>longitude</th><th>depth</th><th>mag</th><th>rms</th><th>place</th></tr>
+
+        {%for re in res%}
+        <tr>
+            <td>{{re[1]}}</td>
+            <td>{{re[2]}}</td>
+            <td>{{re[3]}}</td>
+            <td>{{re[4]}}</td>
+            <td>{{re[5]}}</td>
+            <td>{{re[6]}}</td>
+            <td>{{re[7]}}</td>
+        </tr>
+            {% endfor %}
+
+    </table>
+
+{% endfor %}
+</div>
+
+
+
+
+
+</body>
+</html>

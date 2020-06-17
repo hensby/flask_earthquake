@@ -1,0 +1,4 @@
+applications:
+- name: CloudTestSXY
+  random-route: true
+  memory: 128M

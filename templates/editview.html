@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>edit</title>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active"><a href="/home">query</a></li>
+  <li role="presentation"><a href="/statics">modify</a></li>
+</ul>
+</div>
+<div class="container">
+    <h1>1001682442, Sui, Xueying</h1>
+</div>
+<div class="container">
+    <form action="/edit" method="post" enctype="multipart/form-data">
+        <div class="input-group">
+      <input value="{{item[0]}}" name="ID" style="display:none">
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon" id="Name" style="width:35%;">Name</span>
+      <input value="{{item[1]}}" name="Name" type="text" class="form-control" aria-describedby="basic-addon1">
+    </div>
+        <div class="input-group">
+      <span class="input-group-addon" id="Points" style="width:35%;">Points</span>
+      <input value="{{item[2]}}" name="Points" type="text" class="form-control" aria-describedby="basic-addon1">
+    </div>
+    <div class="input-group">
+  <span class="input-group-addon" id="State" style="width:35%;">State</span>
+  <input value="{{item[3]}}" name="State" type="text" class="form-control" aria-describedby="basic-addon1">
+</div>
+    <div class="input-group">
+  <span class="input-group-addon" id="Room" style="width:35%;">Room</span>
+  <input value="{{item[4]}}" name="Room" type="text" class="form-control" aria-describedby="basic-addon1">
+</div>
+
+
+        <div class="input-group">
+  <span class="input-group-addon" id="Picture" style="width:35%;">Picture</span>
+  <input name="Picture" type="file" class="form-control" aria-describedby="basic-addon1">
+</div>
+
+    <div class="input-group">
+  <span class="input-group-addon" id="Favorite" style="width:35%;">Favorite</span>
+  <input value="{{item[-1]}}" name="Favorite" type="text" class="form-control" aria-describedby="basic-addon1">
+</div>
+        <p><input type="submit" class="btn btn-primary" role="button" value="Save"> <a href="/home" class="btn btn-default" role="button">Cancel</a></p>
+    </form>
+</div>
+</body>
+</html>

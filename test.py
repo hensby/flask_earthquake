@@ -38,13 +38,27 @@ def test1():
 
 
 def test2():
+    part = []
+    max = []
+    max_mag = 0
     conn = sqlite3.connect('test.db')
     print("Open database successfully")
     c = conn.cursor()
-    c.execute(
-        "select * from (select * from all_month left join distance on all_month.id = all_month.id) where distance_from_Dallas <= 500 order by mag DESC limit 1")
+    c.execute("select id from distance where distance_from_Dallas <= 500")
     idList = c.fetchall()
-    print(idList)
+    for id in idList:
+        c.execute("select * from all_month where id = ?", (id))
+        part.append(c.fetchall()[0]);
+    for i in part:
+        if float(i[5]) > max_mag:
+            if len(max) != 0:
+                max.pop(0)
+            max.append(i)
+            max_mag = float(i[5])
+    # c.execute(
+    #     "select * from (select * from all_month left join distance on all_month.id = all_month.id) where distance_from_Dallas <= 500 order by mag DESC limit 1")
+    # idList = c.fetchall()
+    print(max)
 
 
 if __name__ == '__main__':

@@ -133,14 +133,43 @@ def home():
             if distance == '':
                 return render_template('home.html', result=data, k=len(data))
             else:
-                conn = sqlite3.connect('test.db')
-                c = conn.cursor()
-                c.execute(
-                    "select * from (select * from all_month left join distance on all_month.id = all_month.id) where distance_from_Dallas <= ? order by mag DESC limit 1",
-                    (distance,))
-                part = c.fetchall()
-                conn.close()
-            return render_template('home.html', result=part, k=len(part), place=part[0][13])
+                # conn = sqlite3.connect('test.db')
+                # c = conn.cursor()
+                # c.execute(
+                #     "select * from (select * from all_month left join distance on all_month.id = all_month.id) where distance_from_Dallas <= ? order by mag DESC limit 1",
+                #     (distance,))
+                # part = c.fetchall()
+                # conn.close()
+
+                city = request.form['city']
+                if distance == '' or city == '':
+                    data = getData("select * from all_month")
+                    return render_template('home.html', result=data, k=len(data))
+                else:
+                    conn = sqlite3.connect('test.db')
+                    print("Open database successfully")
+                    c = conn.cursor()
+                    if city == "Arlington":
+                        c.execute("select id from distance where distance_from_Arlington <= ?", (distance,))
+                    elif city == "Dallas":
+                        c.execute("select id from distance where distance_from_Dallas <= ?", (distance,))
+                    elif city == "Anchorage":
+                        c.execute("select id from distance where distance_from_Anchorage <= ?", (distance,))
+                    part = []
+                    max = []
+                    max_mag = 0
+                    idList = c.fetchall()
+                    for id in idList:
+                        c.execute("select * from all_month where id = ?", (id))
+                        part.append(c.fetchall()[0]);
+                    for i in part:
+                        if float(i[5]) > max_mag:
+                            if len(max) != 0:
+                                max.pop(0)
+                            max.append(i)
+                            max_mag = float(i[5])
+                    place = [max[0][13], city, distance] # place, city, distance
+            return render_template('home.html', result=max, k=len(max), place=place)
 
 
 

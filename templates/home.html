@@ -158,20 +158,26 @@
 <div class="container">
     <h5>question6</h5>
     <form action="/home" method="POST">
+        <label for="city">Choose a city:</label>
+            <select class ="chosen" name="city" id="city" >
+                  <option value="Arlington">Arlington</option>
+                  <option value="Dallas">Dallas</option>
+                  <option value="Anchorage">Anchorage</option>
+            </select>
         <div class="row">
             <div class="col-lg-6">
                 <div class="input-group">
                     <input name="type" value="largest_quake" style="display:none;">
                     <span class="input-group-btn">
-                        <input type="number" class="form-control" placeholder="input distance from Dallas"
+                        <input type="number" class="form-control" placeholder="input distance from specific city"
                                name="distance">
                         <button class="btn btn-default" type="submit">Search</button>
                         {% if not place %}
                             <h6>please input distance</h6>
-                            <input type="text" name="text1" value="" id="text1" class="form-control" placeholder="Where did largest quake occur near Dallas?" style="width:100%;" disabled/>
+                            <input type="text" name="text1" value="" id="text1" class="form-control" placeholder="Where did largest quake occur near specific city?" style="width:100%;" disabled/>
                         {% else %}
-                            <h6></h6>
-                            <input type="text" name="text1" value="{{ place }}" id="text1" class="form-control" style="width:100%;" disabled/>
+                            <h6>largest quake occur within {{ place[2] }} km of {{ place[1] }}</h6>
+                            <input type="text" name="text1" value="{{ place[0] }}" id="text1" class="form-control" style="width:100%;" disabled/>
                         {% endif %}
                     </span>
                 </div>

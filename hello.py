@@ -61,6 +61,7 @@ def home():
             end = request.form["end"]
             startDate = request.form["startdate"]
             endDate = request.form["enddate"]
+            print(request.form["enddate"])
             if start == '': start = 0
             if end == '': end = 100
             if startDate == '':

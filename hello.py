@@ -7,6 +7,7 @@ from math import sin, asin, cos, radians, fabs, sqrt
 # import datetime
 from datetime import datetime, timedelta
 import time
+import requests
 
 app = Flask(__name__)
 port = int(os.getenv("PORT", 5000))
@@ -243,6 +244,14 @@ def convert():
             if 21 <= hour <= 24 or hour <= 5:
                 night += 1
     return render_template('res.html', total=total, night=night)
+
+
+@app.route('/scale', methods=['GET', 'POST'])
+def scale():
+    ip = requests.get('https://checkip.amazonaws.com').text.strip()
+    print(ip)
+    return render_template('res.html', ip = ip)
+
 
 
 def getData(sql):
